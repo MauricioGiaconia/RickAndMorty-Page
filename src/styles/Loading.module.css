@@ -1,0 +1,51 @@
+@keyframes logo-spin {
+    0% {
+        transform: rotate(359deg);
+    }
+}
+
+.logo{
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+
+}
+
+.border {
+    border-radius: 100%;
+    background-image: url(../img/portal-border.png);
+    background-size: cover;
+    animation: logo-spin 60s infinite linear;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.borderTwo {
+    border-radius: 100%;
+    background-image: url(../img/portal-border-two.png);
+    background-size: cover;
+    animation: logo-spin 120s infinite linear;
+    float: left;
+}
+
+.borderCenter {
+    border-radius: 100%;
+    background-image: url(../img/portal-border-center.png);
+    background-size: cover;
+    animation: logo-spin 90s infinite linear;
+    float: left;
+}
+
+
+@media (min-width: 1001px){
+
+   .logo{
+    height: 400px;
+    width: 400px;
+   }
+
+
+}
+

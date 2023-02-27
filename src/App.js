@@ -1,25 +1,53 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainPage from './components/MainPage';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import CardsPage from './components/CardsPage';
 
-function App() {
+function App () {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+    <div className='App'>
+
+      <Navigation></Navigation>
+
+      <Routes>
+        <Route path='/' element={<MainPage/>} />
+        <Route path='/personajes' element= {<CardsPage></CardsPage>} />
+      </Routes>
+
+
+      {/*       <div className='indexTest'>
+
+              <div className='logo-border'>
+
+                  <div className='logo-border-two'>
+                    <div className='logo-border-center'>
+
+                    </div>
+
+
+                  </div>
+
+              </div>} 
+
+      
+      </div>*/}
+
+
+     
+       
+
+      
+     
+
+      <Footer content='© 2023 Proyecto Rick & Morty - Desarrollado por Mauricio Javier Giaconía'></Footer>
     </div>
-  );
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App

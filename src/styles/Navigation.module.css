@@ -1,0 +1,47 @@
+@keyframes selectedOption {
+    0% { color: #c1f762; }
+    25%{color:#b6f548;}
+    50% { color: #69ad53; }
+    75% { color: #7cbc6c; }
+    100%{color: #a4f518;}
+}
+
+.navContainer{
+    display: flex;
+    justify-content: center;
+    height: 70px;
+    width: 100%;
+    background-color: #252525;
+    margin: 0 auto;
+
+}
+
+
+
+.navContainer ul{
+    list-style: none;
+    align-self: center;
+    height: 100%;
+}
+
+.navContainer ul li{
+    display: inline;
+    text-decoration: none;
+    padding: 10px;
+    border: 1px black solid;
+    color: #fff;
+    font-size: 20px;
+    margin: 0 auto;
+    float: left;
+    line-height: 47.5px;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.selected{
+    animation: selectedOption 4s infinite !important;
+}
+

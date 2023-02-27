@@ -1,0 +1,77 @@
+.card{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 500px;
+    width: 350px;
+    margin: 30px;
+    border-radius: 50px;
+}
+
+
+.card img{
+    border-radius: 90%;
+}
+
+.card button{
+    border-radius: 100%;
+    padding: 10px;
+    background-color: rgb(179, 0, 0);
+}
+
+.card button:hover{
+    background-color: rgb(219, 86, 86);
+}
+
+.textContainer{
+    background: rgb(255, 255, 255, 0.5);
+    border-radius: 50px 50px 0 0;
+    margin-left: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: #000;
+}
+
+.textContainer h2{
+   opacity: 1;
+}
+
+.human{
+    background-image: url('../img/bg-card-human.jpg');
+}
+
+.alien{
+    background-image: url('../img/bg-card-alien.jpg');
+}
+
+.unknown{
+    background-image: url('../img/bg-card-unknown.JPG');
+}
+
+.mythological{
+    background-image: url('../img/bg-card-mythologic.jpg');
+}
+
+.animal{
+    background-image: url('../img/bg-card-animal.jpg');
+}
+
+.cronenberg{
+    background-image: url('../img/bg-card-cronenberg.jpg');
+}
+
+.humanoid{
+    background-image: url('../img/bg-card-humanoid.jpg');
+}
+
+.disease{
+    background-image: url('../img/bg-card-disease.jpg');
+}
+
+.robot{
+    background-image: url('../img/bg-card-robot.jpg');
+}
+
+.poopybutthole{
+    background-image: url('../img/bg-card-poopybutthole.jpg');
+}

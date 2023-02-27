@@ -1,0 +1,51 @@
+.mainContainer{
+    background-image: url('../img/bg-page2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex: 1 1 100%;
+    align-items: center;
+}
+
+.contentContainer{
+    background-image: url('../img/bg-mainPage-portal.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    min-height: 100%;
+    width: 100%;
+    align-self: stretch;
+}
+
+.logoBox{
+    display: flex;
+    align-items: center;
+    place-content: center;
+    width: 600px;
+    height: 100%;
+    align-self: flex-start;
+
+}
+
+.logoTitle{
+    height: 150px;
+    z-index: 1;
+    position: absolute;
+}
+
+.rickContainer{
+    display: flex;
+    width: 600px;
+    height: 600px;
+    align-self: flex-end;
+    margin: 0 auto;
+    margin-left: auto;
+}
+
+
+.indexRick{
+    height: 100%;
+}
