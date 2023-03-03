@@ -5,7 +5,7 @@ import SearchBar from './SearchBar.jsx';
 import Cards from './Cards.jsx';
 import Loading from './Loading';
 
-export default function CardsPage(props) {
+export default function CardsPage() {
 
   const [isSearch, setIsSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,6 +15,8 @@ export default function CardsPage(props) {
 
   const url = 'https://be-a-rym.up.railway.app/api';
   const apiKey = 'ac10126d166d.71df16a1f54c9d912e78';
+
+   
 
   const getCharacters = (xUrl, cleanData = false) => {
 
@@ -73,6 +75,8 @@ export default function CardsPage(props) {
   useEffect(() => {
     getCharacters(`${url}/character?`);
   }, []);
+
+  console.log(data);
 
   const onClickHandleSearch = (xid) => {
     console.log(isSearch);

@@ -34,6 +34,7 @@
 .barContainer button:active{
     height: 40px;
     animation: spin 0.3s linear;
+    
 }
 
 @keyframes expand{

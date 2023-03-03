@@ -25,6 +25,10 @@ function getCharacters(done){
 
 }
 
+
+
+number=5; console.log(number);  
+
 const characters = [
   {
     id: 2,

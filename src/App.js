@@ -4,48 +4,26 @@ import MainPage from './components/MainPage';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import CardsPage from './components/CardsPage';
+import FavouritesPage from './components/FavouritesPage';
 
 function App () {
 
 
   return (
     <BrowserRouter>
-    <div className='App'>
+      <div className='App'>
 
-      <Navigation></Navigation>
+        <Navigation></Navigation>
 
-      <Routes>
-        <Route path='/' element={<MainPage/>} />
-        <Route path='/personajes' element= {<CardsPage></CardsPage>} />
-      </Routes>
-
-
-      {/*       <div className='indexTest'>
-
-              <div className='logo-border'>
-
-                  <div className='logo-border-two'>
-                    <div className='logo-border-center'>
-
-                    </div>
+        <Routes>
+          <Route path='/' element={<MainPage/>} />
+          <Route path='/personajes' element= {<CardsPage></CardsPage>} />
+          <Route path='/favoritos' element= {<FavouritesPage></FavouritesPage>} />
+        </Routes>
 
 
-                  </div>
-
-              </div>} 
-
-      
-      </div>*/}
-
-
-     
-       
-
-      
-     
-
-      <Footer content='© 2023 Proyecto Rick & Morty - Desarrollado por Mauricio Javier Giaconía'></Footer>
-    </div>
+        <Footer content='© 2023 Proyecto Rick & Morty - Desarrollado por Mauricio Javier Giaconía'></Footer>
+      </div>
     </BrowserRouter>
   )
 }

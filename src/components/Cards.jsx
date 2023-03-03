@@ -18,6 +18,7 @@ export default function Cards(props) {
 
    const characters = props.data?.map((character) => <Card
       key={character.id}
+      id={character.id}
       name={character.name}
       species={character.species}
       gender={character.gender}

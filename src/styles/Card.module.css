@@ -2,7 +2,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 500px;
+    height: 520px;
     width: 350px;
     margin: 30px;
     border-radius: 50px;
@@ -11,12 +11,6 @@
 
 .card img{
     border-radius: 90%;
-}
-
-.card button{
-    border-radius: 100%;
-    padding: 10px;
-    background-color: rgb(179, 0, 0);
 }
 
 .card button:hover{
@@ -32,8 +26,40 @@
     color: #000;
 }
 
+.textContainer button{
+    border-radius: 100%;
+    padding: 10px;
+    background-color: rgb(179, 0, 0);
+}
+
 .textContainer h2{
    opacity: 1;
+}
+
+.favBtnContainer{
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+
+
+.favBtnContainer button{
+    font-size: 35px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+}
+
+.favBtnContainer button:hover{
+    text-decoration: none;
+    cursor: pointer;
+    color: #fa3737;
+}
+
+.favSelected{
+    color: #fa3737 !important;
 }
 
 .human{
