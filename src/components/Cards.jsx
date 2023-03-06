@@ -1,14 +1,11 @@
 import Card from './Card';
 import styles from '../styles/Cards.module.css';
-import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getAllCharacters } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import { deleteCharacter } from '../redux/actions';
 
 export default function Cards(props) {
 
-   const disableCard = (element) => {
-      element.style.display = 'none';
-   }
+   const dispatch = useDispatch();
 
    //Funcion recursiva para traer todos los ricks o mortys etc etc
    
@@ -21,7 +18,7 @@ export default function Cards(props) {
       img={character.image}
       altImg={`Imagen de ${character.name}`}
       class={character['species'].toLowerCase()}
-      onClose={(el) => { disableCard(el.target.parentNode.parentNode)}}
+      onClose={() => { dispatch(deleteCharacter(character.id))}}
    ></Card>)
 
    if (!props.btnPrev && !props.btnNext){

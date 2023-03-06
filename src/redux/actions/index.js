@@ -5,6 +5,7 @@ export const GET_CHARACTERS_STARTED = 'GET_CHARACTERS_STARTED';
 export const SEARCH_CHARACTER = 'SEARCH_CHARACTER';
 export const SEARCH_FIRST = 'SEARCH_FIRST';
 export const ADD_FAVOURITE = 'ADD_FAVOURITE';
+export const DELETE_CHARACTER = 'DELETE_CHARACTER';
 export const DELETE_FAVOURITE = 'DELETE_FAVOURITE';
 export const FILTER_CARDS = 'FILTER_CARDS';
 export const ORDER_CARDS = 'ORDER_CARDS';
@@ -49,6 +50,10 @@ export const searchFirst = () =>{
 
 export const addFavourite = (fav) => {
     return {type: ADD_FAVOURITE, payload: fav}
+}
+
+export const deleteCharacter = (xid) => {
+    return {type: DELETE_CHARACTER, payload: xid}
 }
 
 export const deleteFavourite = (xid) => {

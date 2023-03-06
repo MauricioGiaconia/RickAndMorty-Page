@@ -1,14 +1,15 @@
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
 import styleMain from '../styles/MainPage.module.css';
 import Card from './Card.jsx';
-import Loading from './Loading';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteFavourite } from '../redux/actions';
 
-function FavouritesPage(props) {
 
-  if (props.myFavourites['myFavourites'].length === 0) {
+export default function FavouritesPage() {
+
+  const myFavourites = useSelector((state) => state.myFavourites);
+  const dispatch = useDispatch();
+
+  if (myFavourites.length === 0) {
 
     return <div className={`${styleMain.mainContainer}`}>
       <h1>PAGINA VACIA</h1>
@@ -17,11 +18,11 @@ function FavouritesPage(props) {
 
 
   const disableCard = (xid) => {
-    props.deleteFavourite(xid)
+    dispatch(deleteFavourite(xid));
   }
 
   
-  const printFavourites = props.myFavourites['myFavourites'].map((fav) => {
+  const printFavourites = myFavourites.map((fav) => {
     return <Card
       key={fav.id}
       id={fav.id}
@@ -42,17 +43,3 @@ function FavouritesPage(props) {
 
   </div>
 }
-
-export function mapStateToProps(state) {
-  return {
-    myFavourites: state
-  }
-}
-
-export function mapDispatchToProps(dispatch){
-  return {
-    deleteFavourite: (xid) => dispatch(deleteFavourite(xid))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FavouritesPage);

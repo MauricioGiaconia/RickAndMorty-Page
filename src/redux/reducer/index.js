@@ -1,4 +1,4 @@
-import { GET_CHARACTERS, ADD_FAVOURITE, DELETE_FAVOURITE, GET_CHARACTERS_STARTED, SEARCH_CHARACTER, SEARCH_FIRST } from "../actions";
+import { GET_CHARACTERS, ADD_FAVOURITE, DELETE_FAVOURITE, GET_CHARACTERS_STARTED, SEARCH_CHARACTER, SEARCH_FIRST, DELETE_CHARACTER } from "../actions";
 
 const initialState = {
     characters : [],
@@ -46,6 +46,10 @@ const rootReducer = (state = initialState, {type, payload}) => {
 
         case ADD_FAVOURITE:
             return {...state, myFavourites : state.myFavourites.concat(payload)};
+
+        case DELETE_CHARACTER:
+            return {...state, characters : state.characters.filter((char) => char.id != payload)}   
+             
         case DELETE_FAVOURITE:
             return {...state, myFavourites : state.myFavourites.filter((char) => char.id != payload)}
         default: return {...state};
