@@ -4,97 +4,34 @@ import styleMain from '../styles/MainPage.module.css';
 import SearchBar from './SearchBar.jsx';
 import Cards from './Cards.jsx';
 import Loading from './Loading';
+import { connect } from 'react-redux';
+import { getCharacters, getCharactersStarted, searchCharacter, searchFirst } from '../redux/actions';
 
-export default function CardsPage() {
-
-  const [isSearch, setIsSearch] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [nextUrl, setNextUrl] = useState(null);
-  const [prevUrl, setPrevUrl] = useState(null);
+function CardsPage(props) {
 
   const url = 'https://be-a-rym.up.railway.app/api';
-  const apiKey = 'ac10126d166d.71df16a1f54c9d912e78';
-
-   
-
-  const getCharacters = (xUrl, cleanData = false) => {
-
-    if (!isLoading) {
-      setIsLoading(true);
-    }
-
-    fetch(`${xUrl}key=${apiKey}`)
-
-      .then(response => {
-
-        if (response.ok) {
-
-          return response.json();
-        }
-      }
-      )
-      .then(dataApi => {
-
-        if (dataApi.results) {
-          setData(dataApi.results);
-        } else {
-
-          if (cleanData) {
-            setData([dataApi]);
-          } else {
-            setData([...data, dataApi]);
-          }
-
-        }
-
-
-        if (dataApi.info) {
-          if (dataApi.info['prev']) {
-
-            setPrevUrl(dataApi.info['prev']);
-          } else {
-            setPrevUrl(null);
-          }
-
-          if (dataApi.info['next']) {
-
-            setNextUrl(dataApi.info['next']);
-          } else {
-            setNextUrl(null);
-          }
-        }
-
-
-        setIsLoading(false);
-      }
-
-      );
-  }
 
   useEffect(() => {
-    getCharacters(`${url}/character?`);
+    props.getCharactersStarted();
+    props.getCharacters();
   }, []);
 
-  console.log(data);
 
   const onClickHandleSearch = (xid) => {
-    console.log(isSearch);
-    if (!isSearch) {
-      getCharacters(`${url}/character/${xid}?`, true);
-      setIsSearch(true);
-    } else {
-      getCharacters(`${url}/character/${xid}?`, false);
-    }
-
+    props.getCharactersStarted();
+    props.searchCharacter(true);
+    props.getCharacters(`${url}/character/${xid}?`, true);
   }
 
   const onClickHandleReset = () =>{
-    getCharacters(`${url}/character?`);
-    setIsSearch(false);
+    props.getCharactersStarted();
+    props.searchCharacter(false);
+    props.searchFirst();
+    props.getCharacters();
+
   }
 
-  if (isLoading) {
+  if (props.loading) {
     return <div className={`${styleMain.mainContainer}`}>
       <Loading></Loading>
     </div>
@@ -112,9 +49,30 @@ export default function CardsPage() {
 
     <Cards faIconNext={<FaArrowRight />}
       faIconPrev={<FaArrowLeft />}
-      data={data}
+      data={props.characters}
       dataType='character'
-      btnPrev={prevUrl && !isSearch ? () => getCharacters(`${prevUrl}&`) : false}
-      btnNext={url && !isSearch ? () => getCharacters(`${nextUrl}&`) : false}></Cards>
+      btnPrev={props.urlPrev ? () => {props.getCharactersStarted(); props.getCharacters(`${props.urlPrev}&`)} : false}
+      btnNext={props.urlNext ? () => { props.getCharactersStarted(); props.getCharacters(`${props.urlNext}&`)} : false}></Cards>
   </div>
 }
+
+export function mapDispatchToProps(dispatch){
+  return{
+    getCharacters : (url) => dispatch(getCharacters(url)),
+    getCharactersStarted : () => dispatch(getCharactersStarted()),
+    searchCharacter : (search) => dispatch(searchCharacter(search)),
+    searchFirst : () => dispatch(searchFirst())
+  }
+}
+
+export function mapStateToProps(state){
+  return{
+    characters : state.characters,
+    urlPrev : state.urlPrev,
+    urlNext : state.urlNext,
+    cleanList : state.cleanCharacterList,
+    loading: state.loading
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);

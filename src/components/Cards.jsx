@@ -1,5 +1,8 @@
 import Card from './Card';
 import styles from '../styles/Cards.module.css';
+import { connect } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getAllCharacters } from '../redux/actions';
 
 export default function Cards(props) {
 
@@ -7,16 +10,9 @@ export default function Cards(props) {
       element.style.display = 'none';
    }
 
-
    //Funcion recursiva para traer todos los ricks o mortys etc etc
-
-   /*
-   const onClickHandle = (xid, bool) =>{
-      getCharacters(`https://be-a-rym.up.railway.app/api/character/${xid}?`, bool);
-   }*/
-
-
-   const characters = props.data?.map((character) => <Card
+   
+   const characters = props.data?.map((character) =>  <Card
       key={character.id}
       id={character.id}
       name={character.name}
@@ -24,7 +20,7 @@ export default function Cards(props) {
       gender={character.gender}
       img={character.image}
       altImg={`Imagen de ${character.name}`}
-      class={character.species.toLowerCase()}
+      class={character['species'].toLowerCase()}
       onClose={(el) => { disableCard(el.target.parentNode.parentNode)}}
    ></Card>)
 
@@ -71,5 +67,6 @@ export default function Cards(props) {
       <button className={`${styles.btnPagination}`} onClick={props.btnPrev}>{props.faIconPrev}</button>
       <button className={`${styles.btnPagination}`} onClick={props.btnNext}>{props.faIconNext}</button>
 
-   </div>;
+   </div>; 
 }
+
