@@ -1,8 +1,9 @@
 import styles from '../styles/Card.module.css';
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaInfoCircle } from 'react-icons/fa';
 import  { connect } from 'react-redux'
 import { addFavourite, deleteFavourite } from '../redux/actions';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Card(props) {
 
@@ -49,7 +50,8 @@ function Card(props) {
          
          <img  src={props.img} alt={props.altImg} />
          <div className={`${styles.favBtnContainer}`}>
-           <button className={isFav ? `${styles.favSelected}` : 'notSelected'} onClick={handlerFavourite}><FaHeart></FaHeart></button> 
+           <a className={isFav ? `${styles.cardBtn} ${styles.favSelected}` : `${styles.cardBtn} ${styles.favBtn} notSelected`} onClick={handlerFavourite}><FaHeart></FaHeart></a>
+           <Link to={`/personajes/detalle/${props.id}`} className={`${styles.cardBtn} ${styles.infoBtn}`}><FaInfoCircle></FaInfoCircle></Link>
          </div>
          
       </div>

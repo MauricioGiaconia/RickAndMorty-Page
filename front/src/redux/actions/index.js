@@ -9,24 +9,25 @@ export const DELETE_CHARACTER = 'DELETE_CHARACTER';
 export const DELETE_FAVOURITE = 'DELETE_FAVOURITE';
 export const FILTER_CARDS = 'FILTER_CARDS';
 export const ORDER_CARDS = 'ORDER_CARDS';
-const url = 'https://be-a-rym.up.railway.app/api';
+const url = 'http://localhost:3001/rickandmorty';
 const apiKey = 'ac10126d166d.71df16a1f54c9d912e78';
 
-export const getCharacters = (xUrl = `${url}/character?`, cleanData = false) => {
+export const getCharacters = (xUrl = `${url}/character` , cleanData = false) => {
     return (async function(dispatch){
-        const response = await axios.get(`${xUrl}key=${apiKey}`)
+        const response = await axios.get(`${xUrl}`)
                         .then((resp) => resp.data)
                         .then((data) => {
-                            if (data.results){
+                          
+                            if (data.info){
                             
                                 if (data.info['next'] && data.info['prev']){
                                     
-                                    return {type: GET_CHARACTERS, payload: {characters : data.results, urlPrev : data.info['prev'], urlNext : data.info['next'], cleanList : cleanData}}
+                                    return {type: GET_CHARACTERS, payload: {characters : data.info['results'], urlPrev : data.info['prev'], urlNext : data.info['next'], cleanList : cleanData}}
 
                                 } else if (data.info['next'] && !data.info['prev']){
-                                    return {type: GET_CHARACTERS, payload: {characters : data.results, urlPrev : null, urlNext : data.info['next'], cleanList : cleanData}}
+                                    return {type: GET_CHARACTERS, payload: {characters : data.info['results'], urlPrev : null, urlNext : data.info['next'], cleanList : cleanData}}
                                 }
-                                return {type: GET_CHARACTERS, payload: {characters : data.results, urlPrev : data.info['prev'], urlNext : null, cleanList : cleanData}}
+                                return {type: GET_CHARACTERS, payload: {characters : data.info['results'], urlPrev : data.info['prev'], urlNext : null, cleanList : cleanData}}
                             }
 
                                 return {type: GET_CHARACTERS, payload: {characters : data, cleanList : cleanData}}

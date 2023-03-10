@@ -37,6 +37,7 @@
 }
 
 .favBtnContainer{
+    display: flex;
     height: 40px;
     width: 40px;
     margin-left: 20px;
@@ -45,17 +46,24 @@
 
 
 
-.favBtnContainer button{
+.favBtnContainer .cardBtn{
     font-size: 35px;
     background-color: transparent;
     border: none;
-    color: #fff;
+    color: #666;
+    cursor: pointer;
+    margin-left: 5px;
 }
 
-.favBtnContainer button:hover{
+.favBtnContainer .favBtn:hover{
     text-decoration: none;
-    cursor: pointer;
     color: #fa3737;
+}
+
+.favBtnContainer .infoBtn:hover{
+    text-decoration: none;
+    color: #3098fa;
+
 }
 
 .favSelected{

@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import CardsPage from './components/CardsPage';
 import FavouritesPage from './components/FavouritesPage';
+import Detail from './components/Detail';
 
 function App () {
 
@@ -18,7 +19,9 @@ function App () {
         <Routes>
           <Route path='/' element={<MainPage/>} />
           <Route path='/personajes' element= {<CardsPage></CardsPage>} />
+          <Route path='/personajes/detalle/:id' element = {<Detail></Detail>}/>
           <Route path='/favoritos' element= {<FavouritesPage></FavouritesPage>} />
+          
         </Routes>
 
 

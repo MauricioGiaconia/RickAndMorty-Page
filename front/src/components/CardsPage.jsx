@@ -9,7 +9,10 @@ import { getCharacters, getCharactersStarted, searchCharacter, searchFirst } fro
 
 function CardsPage(props) {
 
-  const url = 'https://be-a-rym.up.railway.app/api';
+  const [next, setNext] = useState(2);
+  const [prev, setPrev] = useState(0); 
+
+  const url = 'http://localhost:3001/rickandmorty';
 
   useEffect(() => {
     props.getCharactersStarted();
@@ -20,16 +23,20 @@ function CardsPage(props) {
   const onClickHandleSearch = (xid) => {
     props.getCharactersStarted();
     props.searchCharacter(true);
-    props.getCharacters(`${url}/character/${xid}?`, true);
+    props.getCharacters(`${url}/onsearch/${xid}`, true);
   }
 
   const onClickHandleReset = () =>{
+    setNext(2);
+    setPrev(0);
     props.getCharactersStarted();
     props.searchCharacter(false);
     props.searchFirst();
     props.getCharacters();
 
   }
+
+
 
   if (props.loading) {
     return <div className={`${styleMain.mainContainer}`}>
@@ -51,8 +58,14 @@ function CardsPage(props) {
       faIconPrev={<FaArrowLeft />}
       data={props.characters}
       dataType='character'
-      btnPrev={props.urlPrev ? () => {props.getCharactersStarted(); props.getCharacters(`${props.urlPrev}&`)} : false}
-      btnNext={props.urlNext ? () => { props.getCharactersStarted(); props.getCharacters(`${props.urlNext}&`)} : false}></Cards>
+      btnPrev={props.urlPrev ? () => {props.getCharactersStarted();   
+                                      setNext(next-1);
+                                      setPrev(prev-1);
+                                      props.getCharacters(`${url}/character/${prev}`)} : false}
+      btnNext={props.urlNext ? () => { props.getCharactersStarted(); 
+                                       setNext(next+1);
+                                       setPrev(prev+1);
+                                       props.getCharacters(`${url}/character/${next}`)} : false}></Cards>
   </div>
 }
 

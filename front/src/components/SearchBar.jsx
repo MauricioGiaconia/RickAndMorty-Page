@@ -1,5 +1,5 @@
 import style from '../styles/SearchBar.module.css';
-import {FaSearch, FaRedo} from 'react-icons/fa';
+import {FaSearch, FaRedo, FaDice} from 'react-icons/fa';
 import { useState } from 'react';
 
 
@@ -12,12 +12,15 @@ export default function SearchBar(props) {
       setValue(event.target.value);
    }
 
-   const handleClick = () =>{
+   const handleClick = (random = false) =>{
  
-      if (value){
+      if (value && !random){
       
          props.onSearch(value);
     
+      } else if (random){
+         console.log('aaa')
+         props.onSearch(Math.floor(Math.random() *  (829 - 1 + 1) + 1));
       } 
     
     }
@@ -26,7 +29,8 @@ export default function SearchBar(props) {
    return (
       <div className={`${style.barContainer}`}>
          <input onChange={handleChange} type='search' />
-         <button disabled={value ? false : true} onClick={handleClick}><FaSearch></FaSearch></button> 
+         <button disabled={value ? false : true} onClick={() => {handleClick(false)}}><FaSearch></FaSearch></button> 
+         <button onClick={()=>{handleClick(true)}}><FaDice></FaDice></button>
          <button onClick={props.onReset}><FaRedo></FaRedo></button>
       </div>
    );
