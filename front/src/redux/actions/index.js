@@ -5,14 +5,15 @@ export const GET_CHARACTERS_STARTED = 'GET_CHARACTERS_STARTED';
 export const SEARCH_CHARACTER = 'SEARCH_CHARACTER';
 export const SEARCH_FIRST = 'SEARCH_FIRST';
 export const ADD_FAVOURITE = 'ADD_FAVOURITE';
+export const GET_FAVOURITES = 'GET_FAVOURITES';
 export const DELETE_CHARACTER = 'DELETE_CHARACTER';
 export const DELETE_FAVOURITE = 'DELETE_FAVOURITE';
 export const FILTER_CARDS = 'FILTER_CARDS';
 export const ORDER_CARDS = 'ORDER_CARDS';
+export const IS_LOADING = 'IS_LOADING'
 const url = 'http://localhost:3001/rickandmorty';
-const apiKey = 'ac10126d166d.71df16a1f54c9d912e78';
 
-export const getCharacters = (xUrl = `${url}/character` , cleanData = false) => {
+export const getCharacters = (xUrl = `${url}/characters` , cleanData = false) => {
     return (async function(dispatch){
         const response = await axios.get(`${xUrl}`)
                         .then((resp) => resp.data)
@@ -49,8 +50,27 @@ export const searchFirst = () =>{
     return {type: SEARCH_FIRST, payload: null}
 }
 
-export const addFavourite = (fav) => {
-    return {type: ADD_FAVOURITE, payload: fav}
+export const addFavourite = ((fav) => {
+    console.log(fav);
+    return async () => { 
+       
+        await axios.post(`${url}/fav`, fav)
+            .then((response) => {console.log(response)})
+            .catch((err) => {console.log(err)});
+}})
+
+export const getFavourites = () =>{
+    return (async function(dispatch){
+        const response =  await axios.get(`${url}/fav`)
+                        .then((resp) => resp.data)
+                        .then((data) => {
+                          
+                            return {type: GET_FAVOURITES, payload: data}
+
+                        });
+        
+        return dispatch(response);
+    })
 }
 
 export const deleteCharacter = (xid) => {
@@ -67,4 +87,8 @@ export const filterCards = (gender) => {
 
 export const orderCards = (order) => {
     return {type: ORDER_CARDS, payload: order}
+}
+
+export const setLoading = (loading) => {
+    return {type: IS_LOADING, payload : loading}
 }

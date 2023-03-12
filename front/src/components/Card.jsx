@@ -1,7 +1,7 @@
 import styles from '../styles/Card.module.css';
 import { FaHeart, FaInfoCircle } from 'react-icons/fa';
 import  { connect } from 'react-redux'
-import { addFavourite, deleteFavourite } from '../redux/actions';
+import { addFavourite, deleteFavourite, getFavourites, setLoading } from '../redux/actions';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,26 +17,35 @@ function Card(props) {
 
       if (!isFav){
 
-        setIsFav(true);
+         setIsFav(true);
          return props.addFavourite({
             id : props.id,
             name : props.name,
             species : props.species,
             gender : props.gender,
-            img: props.img,
+            image: props.img,
             altImg : props.altImg
          });
+
+         
       }
 
       setIsFav(false);
-      return props.deleteFavourite(props.id);
+      props.deleteFavourite(props.id);
+      
    }
 
    useEffect(() => {
+
       if (props['myFavourites'].some(character => character.id == props.id)){
          setIsFav(true);
       }
+    
    }, []);
+
+   const handlerInfo = () =>{
+      props.setLoading(true);
+   }
 
    return (
       <div className={`${styles.card} ${styles[splitedClass[0]]}`}>
@@ -51,7 +60,7 @@ function Card(props) {
          <img  src={props.img} alt={props.altImg} />
          <div className={`${styles.favBtnContainer}`}>
            <a className={isFav ? `${styles.cardBtn} ${styles.favSelected}` : `${styles.cardBtn} ${styles.favBtn} notSelected`} onClick={handlerFavourite}><FaHeart></FaHeart></a>
-           <Link to={`/personajes/detalle/${props.id}`} className={`${styles.cardBtn} ${styles.infoBtn}`}><FaInfoCircle></FaInfoCircle></Link>
+           <Link onClick={handlerInfo} className={`${styles.cardBtn} ${styles.infoBtn}`} to={`/personajes/detalle/${props.id}`}><FaInfoCircle></FaInfoCircle></Link>
          </div>
          
       </div>
@@ -61,7 +70,9 @@ function Card(props) {
 export function mapDispatchToProps(dispatch){
    return {
       addFavourite : (character) => {dispatch(addFavourite(character))},
-      deleteFavourite : (xid) => {dispatch(deleteFavourite(xid))}
+      getFavourites : () => {dispatch(getFavourites())},
+      deleteFavourite : (xid) => {dispatch(deleteFavourite(xid))},
+      setLoading : (loading) => {dispatch(setLoading(loading))}
    }
 }
 

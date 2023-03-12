@@ -6,9 +6,17 @@ import Footer from './components/Footer';
 import CardsPage from './components/CardsPage';
 import FavouritesPage from './components/FavouritesPage';
 import Detail from './components/Detail';
+import { useDispatch } from 'react-redux';
+import { getFavourites } from './redux/actions';
+import { useEffect } from 'react';
 
 function App () {
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFavourites())
+  }, []);
 
   return (
     <BrowserRouter>

@@ -1,13 +1,16 @@
 const axios = require('axios');
-const key = 'ac10126d166d.71df16a1f54c9d912e78';
+const URL = 'https://be-a-rym.up.railway.app/api/character/';
+const KEY = 'ac10126d166d.71df16a1f54c9d912e78';
 
-const getCharById = (res, id) => {
+function getCharById(req, res){
 
-    axios.get(`https://be-a-rym.up.railway.app/api/character/${id}?key=${key}`)  
+    const params = req.params
+
+    axios.get(`${URL}${params.id}?key=${KEY}`)  
     .then((response) => response.data)
     .then((data) => {  
         
-        res.writeHead(200, {'Content-Type' : 'application/json'});
+        res.status(200);
 
         let obj = {
             id : data.id,
@@ -17,12 +20,12 @@ const getCharById = (res, id) => {
             species : data.species
         }
 
-        res.end(JSON.stringify(obj));
+        return res.json(obj);
     })
     .catch((err) => {
-        res.writeHead(500, {'Content-Type' : 'text/plain'});
-        res.end(`¡Persona con ID ${id} no encontrado!`);
+        res.status(500);
+        return res.json({'message' : err});
     })
-};
+}
 
 module.exports = {getCharById};

@@ -1,4 +1,4 @@
-import { GET_CHARACTERS, ADD_FAVOURITE, DELETE_FAVOURITE, GET_CHARACTERS_STARTED, SEARCH_CHARACTER, SEARCH_FIRST, DELETE_CHARACTER } from "../actions";
+import { GET_CHARACTERS, GET_FAVOURITES, DELETE_FAVOURITE, GET_CHARACTERS_STARTED, SEARCH_CHARACTER, SEARCH_FIRST, DELETE_CHARACTER, IS_LOADING } from "../actions";
 
 const initialState = {
     characters : [],
@@ -44,18 +44,19 @@ const rootReducer = (state = initialState, {type, payload}) => {
         case SEARCH_FIRST:
             return {...state, isFirstSearch: true}
 
-        case ADD_FAVOURITE:
-            return {...state, myFavourites : state.myFavourites.concat(payload)};
+        case GET_FAVOURITES:
+            return {...state, myFavourites : payload};
 
         case DELETE_CHARACTER:
             return {...state, characters : state.characters.filter((char) => char.id != payload)}   
              
         case DELETE_FAVOURITE:
             return {...state, myFavourites : state.myFavourites.filter((char) => char.id != payload)}
+
+        case IS_LOADING:
+            return {...state, loading : payload}
         default: return {...state};
     }
-
-
 };
 
 export default rootReducer;

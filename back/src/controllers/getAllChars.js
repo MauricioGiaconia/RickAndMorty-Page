@@ -1,29 +1,34 @@
 const axios = require('axios');
-const key = 'ac10126d166d.71df16a1f54c9d912e78';
+const KEY = 'ac10126d166d.71df16a1f54c9d912e78';
 
-const getAllChars = (res, page) => {
+const getAllChars = (req, res) => {
 
     let finalUrl = '';
-    if (page === 'character'){
-        finalUrl = 'https://be-a-rym.up.railway.app/api/character?';
+    let params = req.params;
+    
+    if (Object.keys(params).length > 0){
+        finalUrl = `https://be-a-rym.up.railway.app/api/character?page=${params.page}&`;
+      
     } else{
-        finalUrl = `https://be-a-rym.up.railway.app/api/character?page=${page}&`
+        finalUrl = 'https://be-a-rym.up.railway.app/api/character?';
     }
-    console.log(`${finalUrl}key=${key}`);
-    axios.get(`${finalUrl}key=${key}`)  
+  
+    axios.get(`${finalUrl}key=${KEY}`)  
     .then((response) => response.data)
     .then((data) => {  
         
-        res.writeHead(200, {'Content-Type' : 'application/json'});
-  
-        res.end(JSON.stringify(data));
+        res.status(200);
+        return res.json(data);
+
     })
     .catch((err) => {
-        res.writeHead(500, {'Content-Type' : 'text/plain'});
-        res.end(`¡Lo siento! El portal de Rick no funciona correctamente`);
+        res.status(404);
+        return res.json({
+                error : err,
+                message :`¡Lo siento! El portal de Rick no funciona correctamente`
+            });
     });
 
-    return;
 }
 
 module.exports = {getAllChars}

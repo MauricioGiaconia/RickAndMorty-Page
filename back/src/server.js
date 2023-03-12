@@ -1,33 +1,21 @@
-var fs = require("fs");
-var http = require("http");
-const getAll = require('./controllers/getAllChars')
-const onsearch = require('./controllers/getCharById.js');
-const getDetail = require('./controllers/getCharDetail.js');
+const express = require('express');
+const router = require('./routes/index.js');
 const PORT = 3001;
+const server = express();
 
-http.createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-   
-    if (req.url.includes('rickandmorty/character')){
-    
-        getAll.getAllChars(res, req.url.split('/').pop());
-        return;
-        
-    }
+server.use(express.json());
 
-    if (req.url.includes('rickandmorty/onsearch')){    
-        const id = req.url.split('/').pop();    
-        onsearch.getCharById(res, id);
-        return;
-    }
+server.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
-    if (req.url.includes('rickandmorty/detail')){    
-        const id = req.url.split('/').pop();    
-        getDetail.getCharDetail(res, id);
-        return;
-    }
+server.use('/', router);
+server.use('/rickandmorty/characters', router);
+server.use('/rickandmorty/characters/:page', router);
+server.use('/rickandmorty/onsearch/:id', router);
+server.use('/rickandmorty/detail/:id', router);
+server.use('/rickandmorty/rickandmorty/fav', router);
 
-    res.writeHead(404, 'text/plain');
-    res.end('Route not found');
-})
-.listen(PORT, 'localhost');
+server.listen(PORT);

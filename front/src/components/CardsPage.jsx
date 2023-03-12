@@ -61,11 +61,11 @@ function CardsPage(props) {
       btnPrev={props.urlPrev ? () => {props.getCharactersStarted();   
                                       setNext(next-1);
                                       setPrev(prev-1);
-                                      props.getCharacters(`${url}/character/${prev}`)} : false}
+                                      props.getCharacters(`${url}/characters/${prev}`)} : false}
       btnNext={props.urlNext ? () => { props.getCharactersStarted(); 
                                        setNext(next+1);
                                        setPrev(prev+1);
-                                       props.getCharacters(`${url}/character/${next}`)} : false}></Cards>
+                                       props.getCharacters(`${url}/characters/${next}`)} : false}></Cards>
   </div>
 }
 
