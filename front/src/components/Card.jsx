@@ -18,7 +18,7 @@ function Card(props) {
       if (!isFav){
 
          setIsFav(true);
-         return props.addFavourite({
+         props.addFavourite({
             id : props.id,
             name : props.name,
             species : props.species,
@@ -27,14 +27,15 @@ function Card(props) {
             altImg : props.altImg
          });
 
-         
+         return  props.getFavourites();
       }
 
       setIsFav(false);
       props.deleteFavourite(props.id);
+      props.getFavourites();
       
    }
-
+   
    useEffect(() => {
 
       if (props['myFavourites'].some(character => character.id == props.id)){

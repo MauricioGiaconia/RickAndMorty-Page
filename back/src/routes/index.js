@@ -50,8 +50,8 @@ router.get('/rickandmorty/fav', (req, res) => {
         return res.json(favs);
     };
 
-    res.status(500);
-    return res.json({error : '¡No hay personajes en favoritos!'});
+    res.status(200);
+    return res.json(favs);
 });
 
 router.delete('/rickandmorty/fav/:id', (req, res) => {

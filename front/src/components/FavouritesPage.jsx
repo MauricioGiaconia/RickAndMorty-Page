@@ -2,9 +2,8 @@ import styleMain from '../styles/MainPage.module.css';
 import Card from './Card.jsx';
 import Loading from './Loading';
 import { useDispatch, useSelector, connect } from 'react-redux';
-import { getFavourites, deleteFavourite } from '../redux/actions';
-
-
+import { getFavourites, deleteFavourite, setLoading } from '../redux/actions';
+import { useEffect } from 'react';
 
 export default function FavouritesPage() {
 
@@ -13,7 +12,13 @@ export default function FavouritesPage() {
   const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(setLoading(true));
 
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 200);
+  }, []);
 
   if (myFavourites.length === 0) {
 
@@ -23,8 +28,11 @@ export default function FavouritesPage() {
   }
 
 
+
+
   const disableCard = (xid) => {
     dispatch(deleteFavourite(xid));
+    dispatch(getFavourites())
   }
 
   
@@ -35,7 +43,7 @@ export default function FavouritesPage() {
       name={fav.name}
       species={fav.species}
       gender={fav.gender}
-      img={fav.img}
+      img={fav.image}
       altImg={`Imagen de ${fav.name}`}
       class={fav['species'].toLowerCase()}
       onClose={() => { disableCard(fav.id) }}

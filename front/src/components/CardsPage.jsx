@@ -1,24 +1,38 @@
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import styleMain from '../styles/MainPage.module.css';
+import style from '../styles/Cards.module.css';
 import SearchBar from './SearchBar.jsx';
 import Cards from './Cards.jsx';
 import Loading from './Loading';
 import { connect } from 'react-redux';
 import { getCharacters, getCharactersStarted, searchCharacter, searchFirst } from '../redux/actions';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 function CardsPage(props) {
 
-  const [next, setNext] = useState(2);
-  const [prev, setPrev] = useState(0); 
-
   const url = 'http://localhost:3001/rickandmorty';
+  const {page} = useParams();
+  const navigate = useNavigate();
+
+  let prev = parseInt(page) - 1;
+  let next = parseInt(page) + 1;
+
+  if (isNaN(page)){
+    next = 2;
+  }
 
   useEffect(() => {
     props.getCharactersStarted();
-    props.getCharacters();
-  }, []);
-
+    
+    if (page){
+      props.getCharacters(`${url}/characters/${page}`);
+    } else{
+      props.getCharacters();
+    }
+    
+  
+  }, [useParams()]);
 
   const onClickHandleSearch = (xid) => {
     props.getCharactersStarted();
@@ -27,13 +41,11 @@ function CardsPage(props) {
   }
 
   const onClickHandleReset = () =>{
-    setNext(2);
-    setPrev(0);
     props.getCharactersStarted();
     props.searchCharacter(false);
     props.searchFirst();
+    navigate('/personajes');
     props.getCharacters();
-
   }
 
 
@@ -54,18 +66,15 @@ function CardsPage(props) {
      
     </div>
 
-    <Cards faIconNext={<FaArrowRight />}
-      faIconPrev={<FaArrowLeft />}
+    <Cards
       data={props.characters}
-      dataType='character'
-      btnPrev={props.urlPrev ? () => {props.getCharactersStarted();   
-                                      setNext(next-1);
-                                      setPrev(prev-1);
-                                      props.getCharacters(`${url}/characters/${prev}`)} : false}
-      btnNext={props.urlNext ? () => { props.getCharactersStarted(); 
-                                       setNext(next+1);
-                                       setPrev(prev+1);
-                                       props.getCharacters(`${url}/characters/${next}`)} : false}></Cards>
+      dataType='character'></Cards>
+
+
+      {props.urlPrev ? <Link to={`/personajes/${prev}`} className={`${style.btnPagination}`}><FaArrowLeft></FaArrowLeft></Link> : false} 
+
+      {props.urlNext ? <Link to={`/personajes/${next}`} className={`${style.btnPagination}`}><FaArrowRight></FaArrowRight></Link> : false}
+      
   </div>
 }
 

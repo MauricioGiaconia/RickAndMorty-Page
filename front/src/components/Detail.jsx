@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styleMain from '../styles/MainPage.module.css';
+import style from '../styles/Detail.module.css'
 import Loading from './Loading';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '../redux/actions';
+import { FaBackward } from 'react-icons/fa';
 
 export default function Detail(props){
 
     const [charDetail, setCharDetail] = useState([]);
     const loading = useSelector((state) => state.loading);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const id = useParams();
-    
-    console.log(loading);
 
     const getDetail = async (xid) =>{
     
@@ -40,15 +41,24 @@ export default function Detail(props){
     }
 
     return <div key={id.id} className={`${styleMain.mainContainer}`}>
-        <div className={`imgDetail`}><img src={charDetail.image} alt={`Image of ${charDetail.name}`} /></div>
-        <h1>{charDetail.name}</h1>
-        <ul>
-            <li><strong>Genero: </strong>{charDetail.gender}</li>
-            <li><strong>Estado: </strong>{charDetail.status}</li>
-            <li><strong>Origen: </strong>{charDetail.origin ? charDetail.origin['name'] : 'Desconocido'}</li>
-            <li><strong>Especie: </strong>{charDetail.species}</li>
-        </ul>
-    
-  
+      
+        <div className={`${style.detailContainer}`}>
+            <div className={`${style.detailBackground}`}></div>
+            <div className={`${style.imgDetailContainer}`}><img src={charDetail.image} alt={`Image of ${charDetail.name}`} /></div>
+            <div className={`${style.characterInfo}`}>
+                <h1>{charDetail.name}</h1>
+                <ul>
+                    <li><strong className={`${style.strongItem}`}>Genero: </strong>{charDetail.gender}</li>
+                    <li><strong className={`${style.strongItem}`}>Estado: </strong>{charDetail.status}</li>
+                    <li><strong className={`${style.strongItem}`}>Origen: </strong>{charDetail.origin ? charDetail.origin['name'] : 'Desconocido'}</li>
+                    <li><strong className={`${style.strongItem}`}>Especie: </strong>{charDetail.species}</li>
+                </ul>
+
+                <button className={`${style.backBtn}`} onClick={() => {navigate(-1)}}><FaBackward></FaBackward></button>
+            </div>
+
+          
+           
+        </div>
     </div>
 }

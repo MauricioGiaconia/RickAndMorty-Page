@@ -1,0 +1,79 @@
+.detailBackground{
+    background-image: url('../img/portal.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0;
+    width: 1000px;
+    height: 1000px;
+    animation: background-rotate 70s infinite linear;
+}
+
+.detailContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 2px #000 solid;
+    border-radius: 50px;
+    align-items: center;
+    position: relative;
+    overflow: hidden; 
+}
+
+.characterInfo{
+    margin: 0 auto;
+    height: 300px;
+    width: 400px;
+    border-radius: 0 50px 50px 0;
+    background: rgb(255, 255, 255, 0.5);
+    float: left;
+    align-self: center;
+    position: relative;
+    z-index: 1; /* to place the content on top of the rotating background */
+}
+
+.characterInfo ul{
+    font-size: 20px;
+    list-style: none;
+}
+
+.characterInfo ul li{
+    width: 250px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.imgDetailContainer{
+    height: 300px;
+    position: relative;
+    z-index: 1; /* to place the content on top of the rotating background */
+}
+
+.imgDetailContainer img{
+    border-radius: 50px 0 0 50px;
+    height: 300px;
+}
+
+.backBtn{
+    padding: 7px;
+    border-radius: 100%;
+    box-shadow: 0 3px #999;
+}
+
+.backBtn:hover{
+    background-color: #a3da95;
+}
+
+.backBtn:active{
+    background-color: #a3da95;
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+}
+
+
+@keyframes background-rotate {
+    0%{
+        transform: rotate(360deg);
+    }
+    
+  }
