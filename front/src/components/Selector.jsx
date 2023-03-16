@@ -10,7 +10,20 @@ const Selector = (props) =>{
                             {value: 'unknown', label: 'Desconocido'},
                             {value: 'genderless', label: 'Genderless'}];
 
-    <div>
-        <select name="" id=""></select>
+    const printOrderOpt = (options) =>  options.map((opt, index) => {return <option key={index} value={opt.value}>{opt.label}</option>})
+    
+
+    return <div>
+   
+  
+            <select name="order" id="selectOrder">
+                { printOrderOpt(optionsOrder)}
+            </select>
+            <select name="gender" id="selectGender">
+                {printOrderOpt(optionsGender)}
+            </select>
+
     </div>
 }
+
+export default Selector;

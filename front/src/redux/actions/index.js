@@ -58,7 +58,7 @@ export const addFavourite = (fav) => {
 
         try {
             const response = await axios.post(`${url}/fav`, fav);
-            console.log(response.data);
+            
         } catch (err) {
             console.log(err);
         }
@@ -88,10 +88,9 @@ export const deleteFavourite = (xid) => {
 
         try {
 
-       
-        const response = await axios.delete(`${url}/fav/${xid}`)
-
-        return dispatch({ type: DELETE_FAVOURITE, payload: response.data });
+            const response = await axios.delete(`${url}/fav/${xid}`);
+            console.log(response.data['idDeleted']);
+            return dispatch({ type: DELETE_FAVOURITE, payload: response.data['idDeleted'] });
         
         } catch (err){
             console.log(err);

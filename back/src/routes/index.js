@@ -63,7 +63,7 @@ router.delete('/rickandmorty/fav/:id', (req, res) => {
             if (favs[i].id == params.id){
                 favs.splice(i, 1);
                 res.status(200);
-                return res.json({success : '¡Personaje eliminado con exito!'});
+                return res.json({success : '¡Personaje eliminado con exito!', idDeleted : params.id});
             }
         }
 

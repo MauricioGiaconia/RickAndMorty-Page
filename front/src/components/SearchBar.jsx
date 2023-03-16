@@ -5,8 +5,6 @@ import { useState } from 'react';
 
 export default function SearchBar(props) {
    const [value, setValue] = useState('');
-   const [searching, setSearching] = useState(0);
-
 
    const handleChange = (event) => {
       setValue(event.target.value);
@@ -19,7 +17,7 @@ export default function SearchBar(props) {
          props.onSearch(value);
     
       } else if (random){
-         console.log('aaa')
+       
          props.onSearch(Math.floor(Math.random() *  (829 - 1 + 1) + 1));
       } 
     

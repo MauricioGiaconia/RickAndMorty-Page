@@ -1,24 +1,25 @@
 import styleMain from '../styles/MainPage.module.css';
+import styleCards from '../styles/Cards.module.css';
 import Card from './Card.jsx';
-import Loading from './Loading';
-import { useDispatch, useSelector, connect } from 'react-redux';
-import { getFavourites, deleteFavourite, setLoading } from '../redux/actions';
+import Selector from './Selector.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFavourites, deleteFavourite } from '../redux/actions';
 import { useEffect } from 'react';
 
 export default function FavouritesPage() {
 
   
   const myFavourites = useSelector((state) => state.myFavourites);
-  const loading = useSelector((state) => state.loading);
+  
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setLoading(true));
+  
 
-    setTimeout(() => {
-      dispatch(setLoading(false));
-    }, 200);
-  }, []);
+  useEffect(() => {
+
+    dispatch(getFavourites());
+
+  }, [myFavourites]);
 
   if (myFavourites.length === 0) {
 
@@ -27,15 +28,12 @@ export default function FavouritesPage() {
     </div>
   }
 
-
-
-
   const disableCard = (xid) => {
+
     dispatch(deleteFavourite(xid));
-    dispatch(getFavourites())
+ 
   }
 
-  
   const printFavourites = myFavourites.map((fav) => {
     return <Card
       key={fav.id}
@@ -46,21 +44,17 @@ export default function FavouritesPage() {
       img={fav.image}
       altImg={`Imagen de ${fav.name}`}
       class={fav['species'].toLowerCase()}
-      onClose={() => { disableCard(fav.id) }}
+      onClose={() => { disableCard(fav.id)}}
     />
   });
 
-  if (loading){
-    return <div className={`${styleMain.mainContainer}`}>
-
-      <Loading></Loading>
-    </div>
-  }
-
-
   return <div className={`${styleMain.mainContainer}`}>
-
-    <div> {printFavourites}</div>
+    <div className={`${styleCards.barsContainer}`}><Selector></Selector></div>
+    
+    <div className={`${styleCards.cardsContainer}`}> 
+      
+      {printFavourites}
+    </div>
 
   </div>
 }

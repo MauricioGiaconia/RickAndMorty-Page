@@ -58,7 +58,7 @@ function CardsPage(props) {
 
   return <div className={`${styleMain.mainContainer}`}>
 
-    <div style={{ width: '100%', marginBottom: 'auto' }}>
+    <div className={`${style.barsContainer}`}>
       <SearchBar
         onSearch={onClickHandleSearch}
         onReset={onClickHandleReset}

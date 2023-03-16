@@ -2,9 +2,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    flex: 1 1 100%;
     align-items: center;
     margin-bottom: auto;
+}
+
+.barsContainer{
+    width: 100%;
+    margin-bottom: auto;
+
 }
 
 .btnPagination{

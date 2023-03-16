@@ -8,10 +8,10 @@ import FavouritesPage from './components/FavouritesPage';
 import Detail from './components/Detail';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites } from './redux/actions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function App () {
-
+  const [login, setLogin] = useState(false);
   const favs = useSelector((state) => state.favourites);
   const dispatch = useDispatch();
 

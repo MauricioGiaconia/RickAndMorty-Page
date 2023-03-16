@@ -1,0 +1,25 @@
+.formContainer{
+    align-self: flex-end;
+    color: #fff;
+    margin-bottom: 90px;
+}
+
+.formContainer form label{
+    display: inline-block;
+    width: 100px;
+    padding: 10px;
+}
+
+.inputBorder{
+    height: 25px;
+    width: 185px;
+    border-radius: 20px;
+    background-color: #3F9112;
+}
+
+.formContainer form input{
+    height: 20px;
+    width: 180px;
+    border-radius: 20px;
+    background-color: #EAD815;
+}
