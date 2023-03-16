@@ -3,23 +3,23 @@ import styleCards from '../styles/Cards.module.css';
 import Card from './Card.jsx';
 import Selector from './Selector.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavourites, deleteFavourite } from '../redux/actions';
+import { getFavourites, deleteFavourite, orderCards } from '../redux/actions';
 import { useEffect } from 'react';
 
 export default function FavouritesPage() {
 
   
   const myFavourites = useSelector((state) => state.myFavourites);
-  
+  console.log(myFavourites);
   const dispatch = useDispatch();
 
   
 
   useEffect(() => {
 
-    dispatch(getFavourites());
+    //dispatch(getFavourites());
 
-  }, [myFavourites]);
+  }, []);
 
   if (myFavourites.length === 0) {
 
@@ -32,6 +32,14 @@ export default function FavouritesPage() {
 
     dispatch(deleteFavourite(xid));
  
+  }
+
+  const onOrderHandler = (e) =>{
+    if (e.target.value){
+        console.log(e.target.value)
+        dispatch(orderCards(e.target.value, true));
+      
+    }
   }
 
   const printFavourites = myFavourites.map((fav) => {
@@ -49,7 +57,7 @@ export default function FavouritesPage() {
   });
 
   return <div className={`${styleMain.mainContainer}`}>
-    <div className={`${styleCards.barsContainer}`}><Selector></Selector></div>
+    <div className={`${styleCards.barsContainer}`}><Selector order = {onOrderHandler}></Selector></div>
     
     <div className={`${styleCards.cardsContainer}`}> 
       

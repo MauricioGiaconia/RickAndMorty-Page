@@ -102,8 +102,8 @@ export const filterCards = (gender) => {
     return { type: ORDER_CARDS, payload: gender }
 }
 
-export const orderCards = (order) => {
-    return { type: ORDER_CARDS, payload: order }
+export const orderCards = (order, isFav) => {
+    return { type: ORDER_CARDS, payload: {order: order, isFav: isFav} }
 }
 
 export const setLoading = (loading) => {

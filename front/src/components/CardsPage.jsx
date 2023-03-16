@@ -5,8 +5,9 @@ import style from '../styles/Cards.module.css';
 import SearchBar from './SearchBar.jsx';
 import Cards from './Cards.jsx';
 import Loading from './Loading';
+import Selector from './Selector.jsx';
 import { connect } from 'react-redux';
-import { getCharacters, getCharactersStarted, searchCharacter, searchFirst } from '../redux/actions';
+import { getCharacters, getCharactersStarted, searchCharacter, searchFirst, orderCards } from '../redux/actions';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 function CardsPage(props) {
@@ -48,7 +49,13 @@ function CardsPage(props) {
     props.getCharacters();
   }
 
-
+  const onOrderHandler = (e) =>{
+    if (e.target.value){
+        console.log(e.target.value);
+        props.orderCards(e.target.value, false);
+      
+    }
+}
 
   if (props.loading) {
     return <div className={`${styleMain.mainContainer}`}>
@@ -63,7 +70,8 @@ function CardsPage(props) {
         onSearch={onClickHandleSearch}
         onReset={onClickHandleReset}
       />
-     
+
+     <Selector order = {onOrderHandler}></Selector>
     </div>
 
     <Cards
@@ -83,7 +91,8 @@ export function mapDispatchToProps(dispatch){
     getCharacters : (url) => dispatch(getCharacters(url)),
     getCharactersStarted : () => dispatch(getCharactersStarted()),
     searchCharacter : (search) => dispatch(searchCharacter(search)),
-    searchFirst : () => dispatch(searchFirst())
+    searchFirst : () => dispatch(searchFirst()),
+    orderCards : (value) => dispatch(orderCards(value))
   }
 }
 

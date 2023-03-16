@@ -1,4 +1,4 @@
-import { GET_CHARACTERS, GET_FAVOURITES, DELETE_FAVOURITE, GET_CHARACTERS_STARTED, SEARCH_CHARACTER, SEARCH_FIRST, DELETE_CHARACTER, IS_LOADING } from "../actions";
+import { GET_CHARACTERS, GET_FAVOURITES, DELETE_FAVOURITE, GET_CHARACTERS_STARTED, SEARCH_CHARACTER, SEARCH_FIRST, DELETE_CHARACTER, IS_LOADING, ORDER_CARDS } from "../actions";
 
 const initialState = {
     characters : [],
@@ -54,7 +54,32 @@ const rootReducer = (state = initialState, {type, payload}) => {
             return {...state, myFavourites : state.myFavourites.filter((char) => char.id != payload)}
 
         case IS_LOADING:
-            return {...state, loading : payload}
+            return {...state, loading : payload};
+
+        case ORDER_CARDS:
+            console.log(payload.isFav)
+            if (payload.order == 'asc'){
+                if (payload.isFav){
+                    const sortedCharacters = [...state.myFavourites].sort((a, b) => a.id - b.id);
+              
+                    return {...state, myFavourites : sortedCharacters}
+                }
+
+                const sortedCharacters = [...state.characters].sort((a, b) => a.id - b.id);
+              
+                return {...state, characters : sortedCharacters}
+            }
+
+            if (payload.isFav){
+                const sortedCharacters = [...state.myFavourites].sort((a, b) => b.id - a.id);
+          
+                return {...state, myFavourites : sortedCharacters}
+            }
+
+            const sortedCharacters = [...state.characters].sort((a, b) => b.id - a.id);
+            
+            return {...state, characters : sortedCharacters}
+
         default: return {...state};
     }
 };
