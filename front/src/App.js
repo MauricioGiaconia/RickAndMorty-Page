@@ -30,6 +30,10 @@ function App () {
     
   }
 
+  function logout(){
+    setLogin(false);
+  }
+
   useEffect(() => {
 
     dispatch(getFavourites())
@@ -45,7 +49,7 @@ function App () {
       <div className='App'>
 
 
-        {login ? <Navigation></Navigation> : false}
+        {login ? <Navigation onLogout={logout}></Navigation> : false}
 
         <Routes>
           <Route path='/' element={<MainPage onLogin = {loginUser}/>} />

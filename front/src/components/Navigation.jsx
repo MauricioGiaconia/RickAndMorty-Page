@@ -12,10 +12,15 @@ export default function Navigation(props){
     const { pathname } = location;
     const splitLocation = pathname.split("/");
 
+    const logoutHandler = () =>{
+        props.onLogout();
+    }
+
     return  <nav className={`${styles.navContainer}`}>
         <ul>
             <li><Link  className={splitLocation[1] === 'personajes' ? `${styles.selected}` : ''} to='/personajes'>PERSONAJES</Link></li>     
-            <li><Link  className={splitLocation[1] === 'favoritos' ? `${styles.selected}` : ''} to='/favoritos'>FAVORITOS</Link></li>     
+            <li><Link  className={splitLocation[1] === 'favoritos' ? `${styles.selected}` : ''} to='/favoritos'>FAVORITOS</Link></li>    
+            <li><Link onClick={logoutHandler}> LOGOUT </Link></li> 
         </ul>
     </nav>
 }
