@@ -7,6 +7,7 @@ const getCharDetail = async (req, res) => {
     let params = req.params;
     
     try {
+        
         const response = await axios.get(`${URL}${params.id}?key=${KEY}`);
            
         let obj = {

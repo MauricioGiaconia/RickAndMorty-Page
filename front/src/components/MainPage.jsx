@@ -12,7 +12,7 @@ export default function MainPage(props){
                 <Loading > </Loading>
                 
                
-                <Form></Form>
+                <Form onLogin = {props.onLogin}></Form>
                 
             </div>
           
