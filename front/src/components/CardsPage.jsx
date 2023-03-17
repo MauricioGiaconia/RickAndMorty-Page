@@ -7,7 +7,7 @@ import Cards from './Cards.jsx';
 import Loading from './Loading';
 import Selector from './Selector.jsx';
 import { connect } from 'react-redux';
-import { getCharacters, getCharactersStarted, searchCharacter, searchFirst, orderCards } from '../redux/actions';
+import { getCharacters, getCharactersStarted, searchCharacter, searchFirst, orderCards, filterCards } from '../redux/actions';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 function CardsPage(props) {
@@ -51,11 +51,18 @@ function CardsPage(props) {
 
   const onOrderHandler = (e) =>{
     if (e.target.value){
-        console.log(e.target.value);
+        
         props.orderCards(e.target.value, false);
       
     }
-}
+  }
+
+  const onFilterHandler = (e) => {
+    if (e.target.value){
+      props.filterCards(e.target.value, false);
+      
+    }
+  }
 
   if (props.loading) {
     return <div className={`${styleMain.mainContainer}`}>
@@ -71,17 +78,21 @@ function CardsPage(props) {
         onReset={onClickHandleReset}
       />
 
-     <Selector order = {onOrderHandler}></Selector>
+     <Selector order = {onOrderHandler}
+              filter = {onFilterHandler}></Selector>
     </div>
-
+    
     <Cards
       data={props.characters}
       dataType='character'></Cards>
 
+   
 
-      {props.urlPrev ? <Link to={`/personajes/${prev}`} className={`${style.btnPagination}`}><FaArrowLeft></FaArrowLeft></Link> : false} 
+    {props.urlPrev ? <Link to={`/personajes/${prev}`} className={`${style.btnPagination}`}><FaArrowLeft></FaArrowLeft></Link> : false} 
 
-      {props.urlNext ? <Link to={`/personajes/${next}`} className={`${style.btnPagination}`}><FaArrowRight></FaArrowRight></Link> : false}
+    {props.urlNext ? <Link to={`/personajes/${next}`} className={`${style.btnPagination}`}><FaArrowRight></FaArrowRight></Link> : false}
+
+     
       
   </div>
 }
@@ -92,7 +103,8 @@ export function mapDispatchToProps(dispatch){
     getCharactersStarted : () => dispatch(getCharactersStarted()),
     searchCharacter : (search) => dispatch(searchCharacter(search)),
     searchFirst : () => dispatch(searchFirst()),
-    orderCards : (value) => dispatch(orderCards(value))
+    orderCards : (value) => dispatch(orderCards(value)),
+    filterCards : (value) => dispatch(filterCards(value))
   }
 }
 

@@ -6,14 +6,17 @@ import Footer from './components/Footer';
 import CardsPage from './components/CardsPage';
 import FavouritesPage from './components/FavouritesPage';
 import Detail from './components/Detail';
+import Error from './components/Error';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavourites } from './redux/actions';
+import { getFavourites, searchCharacter } from './redux/actions';
 import { useEffect, useState } from 'react';
 
 function App () {
+  
   const [login, setLogin] = useState(false);
   const navigate = useNavigate();
   const favs = useSelector((state) => state.favourites);
+  const errors = useSelector((state) => state.error);
   const dispatch = useDispatch();
 
   const username = 'maurigiaconia@hotmail.com';
@@ -44,6 +47,14 @@ function App () {
     !login && navigate('/');
   }, [login]);
 
+  useEffect(() => {
+    
+    if (login){
+      navigate(`/${errors.type}`);
+      dispatch(searchCharacter(false));
+    } 
+  }, [errors]);
+
   return (
    
       <div className='App'>
@@ -56,7 +67,8 @@ function App () {
           <Route path='/personajes' element= {<CardsPage></CardsPage>} />
           <Route path='/personajes/:page' element= {<CardsPage></CardsPage>} />
           <Route path='/personajes/detalle/:id' element = {<Detail></Detail>}/>
-          <Route path='/favoritos' element= {<FavouritesPage></FavouritesPage>} />
+          <Route path='/favoritos' element = {<FavouritesPage></FavouritesPage>} />
+          <Route path='*' element = {<Error errorText={`${errors.type} ${errors.message}`}></Error>}/>
         </Routes>
 
 

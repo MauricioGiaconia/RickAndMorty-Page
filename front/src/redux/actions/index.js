@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 export const GET_CHARACTERS = 'GET_CHARACTERS';
 export const GET_CHARACTERS_STARTED = 'GET_CHARACTERS_STARTED';
@@ -11,9 +13,12 @@ export const DELETE_FAVOURITE = 'DELETE_FAVOURITE';
 export const FILTER_CARDS = 'FILTER_CARDS';
 export const ORDER_CARDS = 'ORDER_CARDS';
 export const IS_LOADING = 'IS_LOADING';
+export const SET_ERROR = 'SET_ERROR';
 const url = 'http://localhost:3001/rickandmorty';
 
+
 export const getCharacters = (xUrl = `${url}/characters`, cleanData = false) => {
+
     return (async function (dispatch) {
 
         try{
@@ -33,11 +38,17 @@ export const getCharacters = (xUrl = `${url}/characters`, cleanData = false) => 
 
             return dispatch({ type: GET_CHARACTERS, payload: { characters: response.data, cleanList: cleanData } });
         } catch (err){
-            console.log(err);
+            
+           console.log(err);
+           return dispatch({ type: SET_ERROR, payload:  {error: err.response.status, message: err.response.data['message']} });
         }
 
 
     })
+}
+
+export const cleanErrors = () => {
+    return { type: SET_ERROR, payload: {error: '', message: ''}}
 }
 
 export const getCharactersStarted = () => {
@@ -89,7 +100,6 @@ export const deleteFavourite = (xid) => {
         try {
 
             const response = await axios.delete(`${url}/fav/${xid}`);
-            console.log(response.data['idDeleted']);
             return dispatch({ type: DELETE_FAVOURITE, payload: response.data['idDeleted'] });
         
         } catch (err){
@@ -98,8 +108,9 @@ export const deleteFavourite = (xid) => {
     }
 }
 
-export const filterCards = (gender) => {
-    return { type: ORDER_CARDS, payload: gender }
+export const filterCards = (gender, isFav) => {
+    console.log(gender, isFav);
+    return { type: FILTER_CARDS, payload: {gender : gender, isFav: isFav} }
 }
 
 export const orderCards = (order, isFav) => {

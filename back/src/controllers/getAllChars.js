@@ -15,10 +15,10 @@ const getAllChars = async (req, res) => {
   
     try{
 
-    const response = await axios.get(`${finalUrl}key=${KEY}`)  
-    
-    res.status(200);
-    return res.json(response.data);
+        const response = await axios.get(`${finalUrl}key=${KEY}`)  
+        
+        res.status(200);
+        return res.json(response.data);
 
     } catch(err){
         res.status(404);

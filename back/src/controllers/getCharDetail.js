@@ -24,7 +24,9 @@ const getCharDetail = async (req, res) => {
         res.json(obj);
     } catch(err)  {
         res.status(500);
-        res.json({message : err});
+        res.json({
+            error : err,
+            message : 'Problemas al traer la informacion!'});
     };
 
 }

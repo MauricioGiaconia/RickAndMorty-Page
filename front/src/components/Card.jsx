@@ -27,12 +27,12 @@ function Card(props) {
             altImg : props.altImg
          });
 
-         return  props.getFavourites();
+         return;
       }
 
       setIsFav(false);
       props.deleteFavourite(props.id);
-      props.getFavourites();
+ 
       
    }
    

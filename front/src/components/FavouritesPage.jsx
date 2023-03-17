@@ -3,30 +3,25 @@ import styleCards from '../styles/Cards.module.css';
 import Card from './Card.jsx';
 import Selector from './Selector.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavourites, deleteFavourite, orderCards } from '../redux/actions';
+import { getFavourites, deleteFavourite, orderCards, filterCards } from '../redux/actions';
 import { useEffect } from 'react';
 
 export default function FavouritesPage() {
 
   
   const myFavourites = useSelector((state) => state.myFavourites);
-  console.log(myFavourites);
+  const auxFavs = useSelector(state => state.auxFavourites);
   const dispatch = useDispatch();
 
-  
+ 
 
   useEffect(() => {
 
-    //dispatch(getFavourites());
+    dispatch(getFavourites());
 
   }, []);
 
-  if (myFavourites.length === 0) {
-
-    return <div className={`${styleMain.mainContainer}`}>
-      <h1>PAGINA VACIA</h1>
-    </div>
-  }
+  
 
   const disableCard = (xid) => {
 
@@ -36,10 +31,18 @@ export default function FavouritesPage() {
 
   const onOrderHandler = (e) =>{
     if (e.target.value){
-        console.log(e.target.value)
+   
         dispatch(orderCards(e.target.value, true));
       
     }
+  }
+
+  const onFilterHandler = (e) => {
+    if (e.target.value){
+   
+      dispatch(filterCards(e.target.value, true));
+    
+  }
   }
 
   const printFavourites = myFavourites.map((fav) => {
@@ -56,8 +59,19 @@ export default function FavouritesPage() {
     />
   });
 
+  if (myFavourites.length === 0) {
+
+    return <div className={`${styleMain.mainContainer}`}>
+      {auxFavs.length > 0 ? <Selector order = {onOrderHandler}
+                                                            filter = {onFilterHandler}></Selector> : false}
+    
+      <h1>PAGINA VACIA</h1>
+    </div>
+  }
+
   return <div className={`${styleMain.mainContainer}`}>
-    <div className={`${styleCards.barsContainer}`}><Selector order = {onOrderHandler}></Selector></div>
+    <div className={`${styleCards.barsContainer}`}><Selector order = {onOrderHandler}
+                                                            filter = {onFilterHandler}></Selector></div>
     
     <div className={`${styleCards.cardsContainer}`}> 
       

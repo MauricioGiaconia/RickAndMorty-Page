@@ -1,18 +1,15 @@
-import { useDispatch } from "react-redux";
-import { orderCards } from "../redux/actions";
-
-
 const Selector = (props) =>{
 
     
 
-    const optionsOrder =[{ value: 'asc', label: 'Ascendente'},
-                        {value: 'desc', label: 'Descendente'}];
+    const optionsOrder =[{ value: 'asc', label: '- Ascendente -'},
+                        {value: 'desc', label: '- Descendente -'}];
 
-    const optionsGender =   [{value: 'male', label: 'Masculino'},
-                            {value: 'female', label: 'Femenino'},
-                            {value: 'unknown', label: 'Desconocido'},
-                            {value: 'genderless', label: 'Genderless'}];
+    const optionsGender =  [{value: 'all', label: '- Todos -'},
+                            {value: 'male', label: '- Masculino -'},
+                            {value: 'female', label: '- Femenino -'},
+                            {value: 'unknown', label: '- Desconocido -'},
+                            {value: 'genderless', label: '- Genderless -'}];
 
     const printOrderOpt = (options) =>  options.map((opt, index) => {return <option key={index} value={opt.value}>{opt.label}</option>})
     
@@ -24,7 +21,7 @@ const Selector = (props) =>{
             <select onChange={props.order} name="order" id="selectOrder">
                 { printOrderOpt(optionsOrder)}
             </select>
-            <select name="gender" id="selectGender">
+            <select onChange={props.filter} name="gender" id="selectGender">
                 {printOrderOpt(optionsGender)}
             </select>
 

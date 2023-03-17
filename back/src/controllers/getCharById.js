@@ -24,7 +24,9 @@ async function getCharById(req, res) {
 
     } catch (err) {
         res.status(500);
-        return res.json({ 'message': err });
+        return res.json({ 
+            error : err,
+            message: 'Problemas al traer al personaje!' });
     }
 }
 
