@@ -18,7 +18,6 @@ export default function FavouritesPage() {
   useEffect(() => {
 
     dispatch(getFavourites());
-
   }, []);
 
   

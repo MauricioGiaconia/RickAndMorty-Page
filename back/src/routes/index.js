@@ -68,11 +68,12 @@ router.delete('/rickandmorty/fav/:id', (req, res) => {
         }
 
         res.status(500);
-        return res.json({error : '¡El personaje ingresado no se encuentra en la lista de favoritos!'});
+        return res.json({
+            message : '¡El personaje ingresado no se encuentra en la lista de favoritos!'});
     }
 
     res.status(404);
-    return res.json({error : '¡El id ingresado no es valido'});
+    return res.json({message : '¡El id ingresado no es valido'});
 });
 
 module.exports = router;

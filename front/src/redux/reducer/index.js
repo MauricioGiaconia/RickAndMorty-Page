@@ -54,17 +54,17 @@ const rootReducer = (state = initialState, {type, payload}) => {
             return {...state, myFavourites : payload, auxFavourites: payload};
 
         case DELETE_CHARACTER:
-            return {...state, characters : state.characters.filter((char) => char.id != payload)}   
+            return {...state, characters : state.characters.filter((char) => char.id !== payload)}   
              
         case DELETE_FAVOURITE:
-            return {...state, myFavourites : state.myFavourites.filter((char) => char.id != payload), auxFavourites : state.auxFavourites.filter((char) => char.id != payload)}
+            return {...state, myFavourites : state.myFavourites.filter((char) => char.id !== payload), auxFavourites : state.auxFavourites.filter((char) => char.id !== payload)}
 
         case IS_LOADING:
             return {...state, loading : payload};
 
         case ORDER_CARDS:
             state.myFavourites = state.auxFavourites;
-            if (payload.order == 'asc'){
+            if (payload.order === 'asc'){
                 if (payload.isFav){
                     const sortedCharacters = [...state.myFavourites].sort((a, b) => a.id - b.id);
               
@@ -92,8 +92,8 @@ const rootReducer = (state = initialState, {type, payload}) => {
         
             if (payload.isFav){
 
-                if (payload.gender != 'all'){
-                    const filteredCharacters = [...state.myFavourites].filter((char) => char.gender.toLowerCase() == payload.gender.toLowerCase());
+                if (payload.gender !== 'all'){
+                    const filteredCharacters = [...state.myFavourites].filter((char) => char.gender.toLowerCase() === payload.gender.toLowerCase());
                     
                     return {...state, myFavourites : filteredCharacters}
                 }
@@ -101,8 +101,8 @@ const rootReducer = (state = initialState, {type, payload}) => {
                 return {...state}
             }
 
-            if (payload.gender != 'all'){
-                const filteredCharacters = [...state.characters].filter((char) => char.gender.toLowerCase() == payload.gender.toLowerCase());
+            if (payload.gender !== 'all'){
+                const filteredCharacters = [...state.characters].filter((char) => char.gender.toLowerCase() === payload.gender.toLowerCase());
                 return {...state, characters : filteredCharacters};
             }
             

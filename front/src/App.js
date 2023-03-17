@@ -12,7 +12,7 @@ import { getFavourites, searchCharacter } from './redux/actions';
 import { useEffect, useState } from 'react';
 
 function App () {
-  
+
   const [login, setLogin] = useState(false);
   const navigate = useNavigate();
   const favs = useSelector((state) => state.favourites);
@@ -24,7 +24,7 @@ function App () {
 
   function loginUser(data){
 
-    if (data.username == username && password == data.password){
+    if (data.username === username && password === data.password){
       setLogin(true);
       return navigate('/personajes');
     } 

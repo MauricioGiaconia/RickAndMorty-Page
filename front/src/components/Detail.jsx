@@ -44,7 +44,7 @@ export default function Detail(props){
       
         <div className={`${style.detailContainer}`}>
             <div className={`${style.detailBackground}`}></div>
-            <div className={`${style.imgDetailContainer}`}><img src={charDetail.image} alt={`Image of ${charDetail.name}`} /></div>
+            <div className={`${style.imgDetailContainer}`}><img src={charDetail.image} alt={`Imagen de ${charDetail.name}`} /></div>
             <div className={`${style.characterInfo}`}>
                 <h1>{charDetail.name}</h1>
                 <ul>

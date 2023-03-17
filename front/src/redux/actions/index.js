@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
 
 export const GET_CHARACTERS = 'GET_CHARACTERS';
 export const GET_CHARACTERS_STARTED = 'GET_CHARACTERS_STARTED';
@@ -69,9 +67,9 @@ export const addFavourite = (fav) => {
 
         try {
             const response = await axios.post(`${url}/fav`, fav);
-            
+            console.log(response.data['success']);
         } catch (err) {
-            console.log(err);
+            return {type: SET_ERROR, payload : {error: err.response.status, message: err.response.data['message']}}
         }
 
     }
@@ -85,7 +83,7 @@ export const getFavourites = () => {
         return dispatch({ type: GET_FAVOURITES, payload: response.data });
 
         } catch (err){
-            console.log(err);
+            return {type: SET_ERROR, payload : {error: err.response.status, message: err.response.data['message']}}
         }
     })
 }
@@ -103,13 +101,13 @@ export const deleteFavourite = (xid) => {
             return dispatch({ type: DELETE_FAVOURITE, payload: response.data['idDeleted'] });
         
         } catch (err){
-            console.log(err);
+            return {type: SET_ERROR, payload : {error: err.response.status, message: err.response.data['message']}}
         }
     }
 }
 
 export const filterCards = (gender, isFav) => {
-    console.log(gender, isFav);
+ 
     return { type: FILTER_CARDS, payload: {gender : gender, isFav: isFav} }
 }
 

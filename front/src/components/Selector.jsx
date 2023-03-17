@@ -13,18 +13,16 @@ const Selector = (props) =>{
 
     const printOrderOpt = (options) =>  options.map((opt, index) => {return <option key={index} value={opt.value}>{opt.label}</option>})
     
-   
-
     return <div>
    
-  
-            <select onChange={props.order} name="order" id="selectOrder">
+          
+            <select className={`${style.selector}`} onChange={props.order} name="order" id="selectOrder">
                 { printOrderOpt(optionsOrder)}
             </select>
-            <select onChange={props.filter} name="gender" id="selectGender">
+            <select className={`${style.selector}`} onChange={props.filter} name="gender" id="selectGender">
                 {printOrderOpt(optionsGender)}
             </select>
-
+               
     </div>
 }
 

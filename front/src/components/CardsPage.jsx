@@ -1,5 +1,5 @@
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styleMain from '../styles/MainPage.module.css';
 import style from '../styles/Cards.module.css';
 import SearchBar from './SearchBar.jsx';
