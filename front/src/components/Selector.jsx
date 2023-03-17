@@ -1,6 +1,6 @@
-const Selector = (props) =>{
+import style from '../styles/Selector.module.css';  
 
-    
+const Selector = (props) =>{
 
     const optionsOrder =[{ value: 'asc', label: '- Ascendente -'},
                         {value: 'desc', label: '- Descendente -'}];
