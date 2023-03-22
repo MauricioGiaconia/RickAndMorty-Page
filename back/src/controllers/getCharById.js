@@ -26,7 +26,7 @@ async function getCharById(req, res) {
         res.status(500);
         return res.json({ 
             error : err,
-            message: 'Problemas al traer al personaje!' });
+            message: 'Problemas para traer al personaje!' });
     }
 }
 
