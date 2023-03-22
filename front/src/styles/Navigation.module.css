@@ -6,6 +6,17 @@
     100%{color: #a4f518;}
 }
 
+@media (max-width: 1000px) {
+    .navContainer ul li{
+        font-size: 12px !important;
+        width: 33.33%;
+    }
+
+    a{
+        margin-right: 20px;
+    }
+  }
+
 .navContainer{
     display: flex;
     justify-content: center;
@@ -13,7 +24,6 @@
     width: 100%;
     background-color: #252525;
     margin: 0 auto;
-
 }
 
 
@@ -34,6 +44,7 @@
     margin: 0 auto;
     float: left;
     line-height: 47.5px;
+   
 }
 
 a{

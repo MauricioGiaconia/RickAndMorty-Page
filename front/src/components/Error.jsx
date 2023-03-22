@@ -10,6 +10,17 @@ export default function Error(props){
     useEffect(() => {
         dispatch(cleanErrors);
     }, [])
+
+    if (props.inFavorites){
+        return <div className={`${style.errorFavourite}`}>
+        <div className={`${style.errorContainer}`}>
+            <h1>{props.errorText}</h1>
+        </div>
+        <div className={`${style.imgContainer}`}>       
+            <img src={require('../img/errors.png')} alt="Img of error feedback" />
+        </div>
+    </div>
+    }
    
 
     return <div className={`${styleMain.mainContainer}`}>

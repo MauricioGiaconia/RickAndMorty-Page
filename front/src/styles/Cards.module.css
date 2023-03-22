@@ -1,3 +1,7 @@
+.container{
+    width: 100%;
+}
+
 .cardsContainer{
     display: flex;
     flex-wrap: wrap;

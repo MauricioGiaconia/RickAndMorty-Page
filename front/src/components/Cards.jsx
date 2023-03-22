@@ -21,7 +21,7 @@ export default function Cards(props) {
       onClose={() => { dispatch(deleteCharacter(character.id)) }}
    ></Card>)
 
-   return <div>
+   return <div className={`${styles.container}`}>
 
       <div className={`${styles.cardsContainer}`}>
          {characters}

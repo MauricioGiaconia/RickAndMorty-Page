@@ -1,8 +1,19 @@
+@media (max-width: 1000px) {
+    .barContainer{
+        display: inline-table !important;
+        width: 100px;
+    }
+}
+
+
+
+
 .barContainer{
     padding: 10px;
     display: flex;
     flex-direction: row;
     place-content: center;
+    width: 100%;
   
 }
 

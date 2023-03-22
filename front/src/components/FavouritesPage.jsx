@@ -5,6 +5,7 @@ import Selector from './Selector.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites, deleteFavourite, orderCards, filterCards } from '../redux/actions';
 import { useEffect } from 'react';
+import Error from './Error.jsx';
 
 export default function FavouritesPage() {
 
@@ -64,7 +65,8 @@ export default function FavouritesPage() {
       {auxFavs.length > 0 ? <Selector order = {onOrderHandler}
                                                             filter = {onFilterHandler}></Selector> : false}
     
-      <h1>PAGINA VACIA</h1>
+      <Error errorText='¡No hay personajes en favoritos!'
+              inFavorites = {true}></Error>
     </div>
   }
 

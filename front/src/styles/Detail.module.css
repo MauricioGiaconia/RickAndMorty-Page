@@ -75,5 +75,34 @@
     0%{
         transform: rotate(360deg);
     }
-    
+
   }
+
+
+
+
+@media (max-width: 1000px) {
+
+    .imgDetailContainer{
+        border-radius: 50px 0 0 0;
+        width: 100%;
+    }
+
+    .imgDetailContainer img{
+        border-radius: 50px 50px 0 0;
+        width: 100%;
+    }
+
+    .characterInfo{
+       
+        border-radius: 0 0px 50px 0;
+       
+    }
+
+    .detailBackground{
+       
+        left: -200px;
+       
+    }
+    
+}

@@ -1,3 +1,14 @@
+@media (max-width: 1000px) {
+    .card{
+        width: 100% !important;
+    }
+
+    .card img{
+        width: 85%;
+    }
+}
+
+
 .card{
     background-size: cover;
     background-repeat: no-repeat;
